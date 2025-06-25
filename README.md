@@ -11,6 +11,7 @@ To activate the project environment, in a Julia Repl, run
 To generate Figures 1 and 2, 
 
 ```bash 
+cd("scripts")
 include("examples_fig_1_2.jl")
 ```
 
