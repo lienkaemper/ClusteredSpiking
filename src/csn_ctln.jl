@@ -1,6 +1,5 @@
 using DifferentialEquations
 using LinearAlgebra
-using MAT
 using Plots
 using Graphs
 using GraphPlot
@@ -191,7 +190,7 @@ function graph_to_plot(
         q = graph_plot(sA)
 
         l = @layout [a{0.7w} b]
-        final = Plots.plot(p, q, layout = l, size = (3 * T_max +300 , 200),         bottom_margin = 10px,
+        final = Plots.plot(p, q, layout = l, size = (3 * T_max +300 , 200), bottom_margin = 10px,
                 left_margin = 10px)
         return (final, sol, x0)
     else

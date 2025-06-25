@@ -1,17 +1,17 @@
 using MultivariateStats
 
 
-gr()
+include("../src/csn_ctln.jl")
 default(titlefont = (7, "helvetica"), legendfontsize = 6, guidefont = (6, "helvetica"), xtickfont = (6, "helvetica"), ytickfont = (6, "helvetica"), grid = false, fontfamily = "helvetica")
 
-include("../src/csn_ctln.jl")
+
 
 
 sA = [0 0 1; 1 0 0; 0 1 0]
 n = size(sA, 1)
-pal= distinguishable_colors(
+pal= Colors.distinguishable_colors(
     n +1 ,
-    [RGB(1, 1, 1), RGB(0, 0, 0)],
+    [RGB(1.0, 1.0, 1.0), RGB(0.0, 0.0, 0.0)],
     dropseed = true,
 );
 pal[n+1] = colorant"black";

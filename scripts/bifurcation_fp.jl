@@ -5,13 +5,7 @@ using DifferentialEquations
 
 squareplus(x, a = 0.001) = (x + sqrt(x^2 + a))/2
 
-# function cycle_2!(du, X, p, t = 0)
-# 	(;wEE_self, wEE, wEI, wIE, wII, tau_E, tau_I, b) = p
-# 	x1, x2 = X
-# 	du[1] =(1/tau_E)* (-x1 + max(0, wEE_self*x1 + wEI * x2 + b))
-# 	du[2] = (1/tau_I)*(-x2 + max(0, wIE * x1 + wII * x2))
-# 	du
-# end
+
 
 function cycle_2!(du, X, p, t = 0)
 	(;wEE_self, wEE, wEI, wIE, wII, tau_E, tau_I, b) = p
