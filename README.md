@@ -33,3 +33,4 @@ include("bifurcation_3_cycle.jl")
 ```
 
 
+# ClusteredSpiking
