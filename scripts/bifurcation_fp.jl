@@ -81,4 +81,4 @@ brpo_fold = continuation(probtrap, ci, PALC(), opts_po_cont;
 
 scene = plot(br, brpo_fold)
 plot!(scene, brpo_fold.param,brpo_fold.min, label = "")
-savefig("bifurcation_one_pop.pdf")
+savefig("../results/plots/bifurcation_one_pop.pdf")

@@ -6,7 +6,7 @@ using LinearAlgebra
 using Cairo
 
 
-gr()
+# gr()
 default(titlefont = (7, "helvetica"), legendfontsize = 6, guidefont = (6, "helvetica"), xtickfont = (6, "helvetica"), ytickfont = (6, "helvetica"), grid = false, fontfamily = "helvetica")
 
 proj_ei = [1 1 1 0; 0 0 0 1]
@@ -225,7 +225,7 @@ brpo_bottom_forward = continuation(probtrap, ci, PALC(), opts_po_cont;
     argspo...
     )
 
-bottom_loop =  get_periodic_orbit(brpo_bottom, 1)
+bottom_loop =  get_periodic_orbit(brpo_bottom_forward, 1)
 plot(bottom_loop)
 
 
@@ -291,7 +291,7 @@ plot!(bif_diagram, brpo_top_back.param, brpo_top_back.min, label = "",  color = 
 plot!(bif_diagram, brpo_top_back.param, brpo_top_back.max, label = "",  color = pal[6], linestyle = :dash)
 Plots.xlabel!("tau_I/tau_E")
 Plots.ylabel!("x_I")
-savefig("bif_diagram.pdf")
+savefig("../results/plots/bif_diagram.pdf")
 
 
 ctln_cycle = get_periodic_orbit(brpo_cycle, 1)
@@ -303,7 +303,7 @@ projplot_ctln = plot(size = (150, 150), legend = false)
 plot(ctln_cycle, palette = palette, legend = false, size = (200, 150),  ylimits = (0,1))
 Plots.xlabel!("Time")
 Plots.ylabel!("Firing rate")
-savefig("inhib_fast_ctln.pdf")
+savefig("../results/plots/inhib_fast_ctln.pdf")
 
 
 ctln_cycle = get_periodic_orbit(brpo_cycle, 144)
@@ -318,14 +318,14 @@ sol = DifferentialEquations.solve(prob_de, Rodas5())
 plot!(sol, palette = pal[1:4], alpha = 0.5, width = 2)
 Plots.xlabel!("Time")
 Plots.ylabel!("Firing rate")
-savefig("inhib_equal_ctln.pdf")
+savefig("../results/plots/inhib_equal_ctln.pdf")
 
 ctln_cycle = get_periodic_orbit(brpo_cycle,439)
 brpo_cycle.param[439]
 plot(ctln_cycle, palette = palette, legend=false, size = (200, 150),  ylimits = (0,1))
 Plots.xlabel!("Time")
 Plots.ylabel!("Firing rate")
-savefig("e_i_3_ctln.pdf")
+savefig("../results/plots/e_i_3_ctln.pdf")
 
 projpts = proj_ctln * ctln_cycle[:,:]
 plot!(projplot_ctln, projpts[1,:], projpts[2,:], color = :red)
@@ -337,7 +337,7 @@ brpo_ei.param[202]
 plot(ei_cycle, palette = palette, legend=false, size = (200, 150),  ylimits = (0,1))
 Plots.xlabel!("Time")
 Plots.ylabel!("Firing rate")
-savefig("e_i_3.pdf")
+savefig("../results/plots/e_i_3.pdf")
 
 projpts = proj_ctln * ei_cycle[:,:]
 plot!(projplot_ctln, projpts[1,:], projpts[2,:], color = :black, seriestype = :scatter)
@@ -351,7 +351,7 @@ mixed_cycle = get_periodic_orbit(brpo_top, iter)
 plot(mixed_cycle, palette = palette, legend=false, size = (200, 150),  ylimits = (0,1))
 Plots.xlabel!("Time")
 Plots.ylabel!("Firing rate")
-savefig("mixed_cycle.pdf")
+savefig("../results/plots/mixed_cycle.pdf")
 
 projpts = proj_ctln * mixed_cycle[:,:]
 plot!(projplot_ctln, projpts[1,:], projpts[2,:], color = :purple)
@@ -366,11 +366,11 @@ plot!(projplot_ei, [projfp[1]], [projfp[2]], color = :gray, seriestype = :scatte
 
 Plots.xlabel!(projplot_ctln, "x_1 - x_2")
 Plots.ylabel!(projplot_ctln, "x_1 + x_2 - 2x_3")
-savefig("proj_ctln.pdf")
+savefig("../results/plots/proj_ctln.pdf")
 
 Plots.xlabel!(projplot_ei, "x_1 + x_2 + x_3")
 Plots.ylabel!(projplot_ei, "x_I")
-savefig("proj_ei.pdf")
+savefig("../results/plots/proj_ei.pdf")
 iter  = 800
 
 par_btwn_further = (wEE_self =1.5, wEE = .75 , wEI  = -2.25, wIE = 2.0, wII = -2.0, tau_E = 1.0, tau_I = brpo_cycle[iter].param, b = 1.0, a = 0.0)
@@ -400,12 +400,12 @@ sol = DifferentialEquations.solve(prob_de, Rodas5())
 plot(sol, palette = pal[1:4], legend = false,  size = (200, 150))
 Plots.xlabel!("Time")
 Plots.ylabel!("Firing rate")
-savefig("quasiperiodic.pdf")
+savefig("../results/plots/quasiperiodic.pdf")
 
 projpts = proj_ctln* hcat(sol.u[:,:]...)
 projplot_weird = plot(size = (150, 150), legend = false)
 plot!(projplot_weird, projpts[1,:], projpts[2,:], legend = false, color = pal[4])
-savefig("quasiperiodic_proj.pdf")
+savefig("../results/plots/quasiperiodic_proj.pdf")
 
 stab_list = [] 
 tau_Is = 1:.001:3
