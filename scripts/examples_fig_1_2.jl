@@ -63,7 +63,7 @@ u_ctln = hcat(sol_ctln.u...)';
 v_ctln = r_to_v(u_ctln', W_ctln, hcat(stimfunction_filt_ctln.(t for t in sol_ctln.t)...))'
 r_ctln = max.(v_ctln, 0)
 plot( sol_ctln.t, r_ctln[:,:], lc = palette', size=(400,200),  legend = false)
-savefig("../results/example_graph_ctln_cycle.pdf")
+savefig("../results/plots/example_graph_ctln_cycle.pdf")
 
 filt_in_ei_ctln  = filter_input([τ_E; τ_E; τ_E; τ_E; τ_I], b_small, stimfunction_small,  collect(1:T_max))
 stimfunction_filt_ei_ctln(t) = filt_in_ei_ctln[:,max(1, Int(ceil(t)))]
@@ -72,7 +72,7 @@ u_ei_ctln = hcat(sol_ei_ctln.u...)';
 v_ei_ctln = r_to_v(u_ei_ctln', W_small, hcat(stimfunction_filt_ei_ctln.(t for t in sol_ei_ctln.t)...))'
 r_ei_ctln = max.(v_ei_ctln, 0)
 plot( sol_ei_ctln.t, r_ei_ctln[:,:], lc = palette', size=(400,200),  legend = false)
-savefig("../results/example_graph_ei_ctln_cycle.pdf")
+savefig("../results/plots/example_graph_ei_ctln_cycle.pdf")
 
 
 W, b, ids  =random_from_sA(sA, NE = NE, NI = NI, pEE=pEE, pEI=pEI, pIE=pIE, pII=pII,  pE_self=pE_self, ϵ=.25, δ=.5, θ=.1, WII = -3);
@@ -100,7 +100,7 @@ xlabel!("Time (ms)")
 ylabel!("Firing rate (spikes/ms)")
 
 plot(p2, p1, layout = (2, 1), size = (300, 300), legend = false)
-savefig("../results/example_graph_stim_spike_vs_rate.pdf")
+savefig("../results/plots/example_graph_stim_spike_vs_rate.pdf")
 
 
 idxs = rand(N) .< .05
@@ -109,7 +109,7 @@ df =spikes[∈(plot_neur).(spikes.neurons), :]
 df.yval = [findfirst(x -> x == neuron, plot_neur) for neuron in df.neurons]
 gr( size=(400,200),legend=false,markerstrokewidth=0,markersize=30)
 scatter(df.spktimes, df.yval, color = palette[ids[Int.(df.neurons)]], markersize = .3, markerstrokewidth=0, legend = false, markershape=:circle, size=(300,150))
-savefig("../results/example_graph_raster_stim.pdf")
+savefig("../results/plots/example_graph_raster_stim.pdf")
 
 
 
@@ -125,7 +125,7 @@ colors = palette[labels]
 
 p = gplot(g, nodefillc = colors, arrowlengthfrac = 0)
 
-draw(PDF("../results/example_graph.pdf"), p)
+draw(PDF("../results/plots/example_graph.pdf"), p)
 
 
 
@@ -191,14 +191,14 @@ stimfunction_big(t) = stimfunction_small(t)[ids]
 v0_big = W * x0_big + b
 t, v, spikes = sim_v_model_spiking(W, b, ids; v0 = v0_big, T_max = T_max, dt = dt, tau_I =τ_I, tau_E =τ_E,  stimfunction = stimfunction_big);
 plot(t, v', lc = palette',  legend = false)
-savefig("../results/fix_pt_fig_stim.pdf")
+savefig("../results/plots/fix_pt_fig_stim.pdf")
 
 idxs = rand(N) .< .05
 plot_neur = sort(findall(idxs))
 df =spikes[∈(plot_neur).(spikes.neurons), :]
 df.yval = [findfirst(x -> x == neuron, plot_neur) for neuron in df.neurons]
 scatter(df.spktimes, df.yval, color = pal[ids[Int.(df.neurons)]], markersize = .3, markerstrokewidth=0,  size=(300,150), legend=false)
-savefig("../results/fix_pt_fig_stim_raster.pdf")
+savefig("../results/plots/fix_pt_fig_stim_raster.pdf")
 
 
 
@@ -215,7 +215,7 @@ colors = pal[labels]
 
 p = gplot(g, nodefillc = colors, arrowlengthfrac = 0)
 
-draw(PDF("../results/fixed_point_fig_graph.pdf"), p)
+draw(PDF("../results/plots/fixed_point_fig_graph.pdf"), p)
 
 
       
@@ -279,14 +279,14 @@ stimfunction_big(t) = stimfunction_small(t)[ids]
 v0_big = W * x0_big + b
 t, v, spikes = sim_v_model_spiking(W, b, ids; v0 = v0_big, T_max = T_max, dt = dt, tau_I =τ_I, tau_E =τ_E,  stimfunction = stimfunction_big);
 plot(t, v', lc = palette',  legend = false)
-savefig("../results/fix_pt_fig_stim.pdf")
+savefig("../results/plots/fix_pt_fig_stim.pdf")
 
 idxs = rand(N) .< .05
 plot_neur = sort(findall(idxs))
 df =spikes[∈(plot_neur).(spikes.neurons), :]
 df.yval = [findfirst(x -> x == neuron, plot_neur) for neuron in df.neurons]
 scatter(df.spktimes, df.yval, color = pal[ids[Int.(df.neurons)]], markersize = .3, markerstrokewidth=0,  size=(300,150), legend=false)
-savefig("../results/indep_set_fig_stim_raster.pdf")
+savefig("../results/plots/indep_set_fig_stim_raster.pdf")
 
 
 NE_plot = 50
@@ -302,4 +302,4 @@ colors = pal[labels]
 
 p = gplot(g, nodefillc = colors, arrowlengthfrac = 0 )
 
-draw(PDF("../results/indep_set_graph.pdf"), p)
+draw(PDF("../results/plots/indep_set_graph.pdf"), p)

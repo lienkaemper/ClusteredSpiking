@@ -115,4 +115,4 @@ vspan!([T_stim, T_max], color = colorant"gray", label = "stimulus", alpha = 0.25
 plot!(T, r', lc = pal')
 
 plot(p2,p1, layout = (2,1), size = (255, 350))
-savefig("../results/paradoxical.pdf")
+savefig("../results/plots/paradoxical.pdf")
